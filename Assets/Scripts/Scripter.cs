@@ -52,6 +52,7 @@ public class Scripter : MonoBehaviour
     public static int money;
     public static Text moneyText;
 
+
     public static void OnMoneyChange()
     {
         moneyText.text = "$ " + money;
