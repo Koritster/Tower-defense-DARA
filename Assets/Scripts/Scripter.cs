@@ -9,6 +9,12 @@ public class Scripter : MonoBehaviour
     private void Awake()
     {
         moneyText = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<Text>();
+        pricesStatic = prices;
+        money = startMoney;
+        for (int i = 0; i < toggles.Length; i++)
+        {
+            toggles[i].transform.GetChild(1).GetComponent<Text>().text = "$ " + pricesStatic[i];
+        }
         OnMoneyChange();
     }
 
@@ -49,9 +55,11 @@ public class Scripter : MonoBehaviour
 
     #region Money
 
-    public static int money;
+    public int[] prices;
+    [SerializeField]  private int startMoney;
     public static Text moneyText;
-
+    public static int money;
+    public static int[] pricesStatic;
 
     public static void OnMoneyChange()
     {
