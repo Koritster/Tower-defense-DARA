@@ -51,11 +51,13 @@ public class EnemyIA : MonoBehaviour
     #region Waypoints
 
     private int wavepointIndex = 0;
+    public int damage;
 
     private void NextWaypoint()
     {
         if (wavepointIndex >= Waypoints.waypoints.Length - 1)
         {
+            Scripter.PlayerReceiveDamage(damage);
             Destroy(gameObject);
         }
         else

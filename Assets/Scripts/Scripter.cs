@@ -8,6 +8,7 @@ public class Scripter : MonoBehaviour
 {
     private void Awake()
     {
+        playerHealthStatic = playerHealth;
         moneyText = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<Text>();
         pricesStatic = prices;
         money = startMoney;
@@ -56,7 +57,7 @@ public class Scripter : MonoBehaviour
     #region Money
 
     public int[] prices;
-    [SerializeField]  private int startMoney;
+    [SerializeField] private int startMoney;
     public static Text moneyText;
     public static int money;
     public static int[] pricesStatic;
@@ -64,6 +65,23 @@ public class Scripter : MonoBehaviour
     public static void OnMoneyChange()
     {
         moneyText.text = "$ " + money;
+    }
+
+    #endregion
+
+    #region Player Health
+
+    public int playerHealth;
+    public static int playerHealthStatic;
+
+    public static void PlayerReceiveDamage(int damagePoints)
+    {
+        playerHealthStatic -= damagePoints;
+        if(playerHealthStatic <= 0)
+        {
+            Debug.Log("Te moristes ijo");
+            //Game Over
+        }
     }
 
     #endregion
