@@ -1,26 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
     public float timeBetweenWaves = 10f;
-    private float countdown = 3f;
+    private float countdown = 15f;
 
     [SerializeField]
     private GameObject[] enemyPrefab = new GameObject[1];
     [SerializeField]
     private Transform spawnPoint;
 
-    private int waveNo = 1;
+    public GameObject losePanel, mainPanel;
 
-    // Update is called once per frame
+    private int waveNo = 0;
+    [SerializeField] private int wavesToWin;
+
+    public Text waveText;
+
+    private void Awake()
+    {
+        waveText = GameObject.FindGameObjectWithTag("WaveCounter").GetComponent<Text>();
+    }
+
     void Update()
     {
         if (countdown <= 0f)
         {
-            StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
+            if(waveNo < wavesToWin)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+                waveText.text = "Oleada " + waveNo;
+            }
+            else
+            {
+                if (GameObject.FindGameObjectsWithTag("Enemy") == null)
+                {
+                    mainPanel.SetActive(false);
+                    losePanel.SetActive(true);
+                }
+            }
         }
 
         countdown -= Time.deltaTime;

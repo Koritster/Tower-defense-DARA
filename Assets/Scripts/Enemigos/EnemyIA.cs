@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyIA : MonoBehaviour
 {
     [Range(1, 10)]
-    public float speed;
+    public float normalSpeed, speed;
 
     private Rigidbody rb;
     private Transform target;
@@ -46,6 +46,18 @@ public class EnemyIA : MonoBehaviour
         }
     }
 
+    public void ChangeSpeed(float multiplicador, float timeOfSlowness)
+    {
+        speed *= 1 - multiplicador;
+        StartCoroutine(Slowness(timeOfSlowness));
+    }
+
+    IEnumerator Slowness(float timeOfSlowness)
+    {
+        yield return new WaitForSeconds(timeOfSlowness);
+        speed = normalSpeed;
+    }
+
     #endregion
 
     #region Waypoints
@@ -74,12 +86,16 @@ public class EnemyIA : MonoBehaviour
 
     [Header("Vida")]
     public int health;
+    [Tooltip("Primer parametro - Dinero minimo a dropear. Segundo parametro - Dinero maximo a dropear.")]
+    public Vector2 moneyDying;
     
     public void ReceiveDamage(int damagePoints)
     {
         health -= damagePoints;
         if (health <= 0)
         {
+            Scripter.money += Random.Range((int)moneyDying.x, ((int)moneyDying.y + 1));
+            Scripter.OnMoneyChange();
             Destroy(gameObject);
         }
     }

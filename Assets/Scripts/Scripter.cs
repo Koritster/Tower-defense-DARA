@@ -8,7 +8,11 @@ public class Scripter : MonoBehaviour
 {
     private void Awake()
     {
+        winPanel = GameObject.FindGameObjectWithTag("Win Panel");
+        mainPanel = GameObject.FindGameObjectWithTag("Main Panel");
         playerHealthStatic = playerHealth;
+        maxPlayerHealthStatic = playerHealth;
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Image>();
         moneyText = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<Text>();
         pricesStatic = prices;
         money = startMoney;
@@ -20,11 +24,6 @@ public class Scripter : MonoBehaviour
     }
 
     #region Botones
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 
     public void ChangeScene(int nScene)
     {
@@ -72,16 +71,28 @@ public class Scripter : MonoBehaviour
     #region Player Health
 
     public int playerHealth;
-    public static int playerHealthStatic;
+    public static int playerHealthStatic, maxPlayerHealthStatic;
+    public static Image healthBar;
+
+    static GameObject winPanel, mainPanel;
 
     public static void PlayerReceiveDamage(int damagePoints)
     {
         playerHealthStatic -= damagePoints;
-        if(playerHealthStatic <= 0)
+        OnHealthChange();
+
+        if (playerHealthStatic <= 0)
         {
             Debug.Log("Te moristes ijo");
             //Game Over
+            mainPanel.SetActive(false);
+            winPanel.SetActive(true);
         }
+    }
+
+    private static void OnHealthChange()
+    {
+        healthBar.fillAmount = (float)playerHealthStatic / maxPlayerHealthStatic;
     }
 
     #endregion

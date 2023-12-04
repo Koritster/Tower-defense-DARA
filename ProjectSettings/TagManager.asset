@@ -9,6 +9,11 @@ TagManager:
   - Turret
   - Tile
   - MoneyText
+  - HealthBar
+  - WaveCounter
+  - Main Panel
+  - Win Panel
+  - Lose Panel
   layers:
   - Default
   - TransparentFX

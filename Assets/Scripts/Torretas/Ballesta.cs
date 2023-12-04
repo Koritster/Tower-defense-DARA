@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Ballesta : MonoBehaviour
 {
     public Transform target;
     public float range = 15f;
@@ -26,18 +26,18 @@ public class Turret : MonoBehaviour
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach(GameObject enemy in enemies)
+        foreach (GameObject enemy in enemies)
         {
             float distanceEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if(distanceEnemy < shortestDistance)
+            if (distanceEnemy < shortestDistance)
             {
                 shortestDistance = distanceEnemy;
                 nearestEnemy = enemy;
             }
         }
 
-        if(nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
         }
@@ -54,7 +54,7 @@ public class Turret : MonoBehaviour
             return;
         }
 
-        if(fireCountdown <= 0f)
+        if (fireCountdown <= 0f)
         {
             Shoot();
             fireCountdown = 1f / fireRate;
@@ -65,9 +65,9 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        
+        GameObject bullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Arrow bulletScript = bullet.GetComponent<Arrow>();
+
         if (bullet != null)
             bulletScript.Seek(target);
     }
