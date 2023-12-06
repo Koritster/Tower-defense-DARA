@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917814756349864383}
-  - component: {fileID: 2635187357030640773}
+  - component: {fileID: 7620124385752584096}
   m_Layer: 0
   m_Name: ballesta
   m_TagString: Untagged
@@ -215,7 +215,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2635187357030640773
+--- !u!114 &7620124385752584096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,13 +224,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1285393898483233541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78405bc8cf5067148ae7daa8a385f34b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dfb9c3062b184545bffaba7cf9c1721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  range: 5
+  range: 4
   enemyTag: Enemy
-  fireRate: 3
+  fireRate: 4
   bulletPrefab: {fileID: 5296721407197562138, guid: 001afb2ff3046de4ea337541ce0fbb90, type: 3}
   firePoint: {fileID: 5730741782977631673}
 --- !u!1 &1629081152717536304

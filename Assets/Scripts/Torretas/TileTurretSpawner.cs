@@ -5,6 +5,12 @@ using UnityEngine;
 public class TileTurretSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] turretPrefabs;
+    AudioSource building;
+
+    private void Awake()
+    {
+        building = GameObject.FindGameObjectWithTag("Scripter").transform.GetChild(1).GetComponent<AudioSource>();
+    }
 
     public void SpawnTurret()
     {
@@ -16,6 +22,7 @@ public class TileTurretSpawner : MonoBehaviour
                 Scripter.money -= Scripter.pricesStatic[i];
                 Scripter.OnMoneyChange();
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y + turretPrefabs[i].GetComponent<Renderer>().bounds.size.y / 2, transform.position.z);
+                building.Play();
                 Instantiate(turretPrefabs[i], pos, Quaternion.identity);
                 Destroy(gameObject);
             }

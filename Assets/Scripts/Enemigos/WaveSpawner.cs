@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public float timeBetweenWaves = 10f;
+    public float timeBetweenWaves = 15f;
     private float countdown = 15f;
 
     [SerializeField]
@@ -19,10 +19,13 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private int wavesToWin;
 
     public Text waveText;
+    private AudioSource audioWaves;
 
     private void Awake()
     {
         waveText = GameObject.FindGameObjectWithTag("WaveCounter").GetComponent<Text>();
+        audioWaves = GameObject.Find("SpawnPoint").GetComponent<AudioSource>();
+        Debug.Log(audioWaves);
     }
 
     void Update()
@@ -50,6 +53,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
+        audioWaves.Play();
         for (int i = 0; i < waveNo ; i++)
         {
             SpawnEnemy();

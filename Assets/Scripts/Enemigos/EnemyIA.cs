@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyIA : MonoBehaviour
 {
-    [Range(1, 10)]
+    [Range(0, 5)]
     public float normalSpeed, speed;
 
     private Rigidbody rb;
     private Transform target;
 
+    public ParticleSystem particleMorir;
 
     void Awake()
     {
@@ -96,9 +97,18 @@ public class EnemyIA : MonoBehaviour
         {
             Scripter.money += Random.Range((int)moneyDying.x, ((int)moneyDying.y + 1));
             Scripter.OnMoneyChange();
+            particleMorir.Play();
             Destroy(gameObject);
         }
     }
 
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bomb"))
+        {
+            ReceiveDamage(3);
+        }
+    }
 }
